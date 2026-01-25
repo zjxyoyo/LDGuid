@@ -1,0 +1,100 @@
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = [
+  # sync with setup.py until we discard non-pep-517/518
+  "setuptools>=45.0",
+  "setuptools-scm[toml]>=6.2.3",
+  "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src"]
+
+
+[project]
+name = "wildfire-segmentation"
+dynamic = ["version"]
+authors = [
+    {name="Forrest Zhang", email="forrest.zhang@mail.utoronto.ca"},
+    {name="Jiaxuan Zhao", email="yoyoeric.zhao@mail.utoronto.ca"},
+    { name="Yan Zhang", email="claudeyan.zhang@mail.utoronto.ca" },
+]
+description = "wildfire segmentation"
+readme = "README.md"
+keywords = ["ML"]
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries"
+]
+
+dependencies = [
+    "notebook",
+    "jupyterlab",
+    "torch",
+    "torchvision",
+    "matplotlib",
+    "tqdm",
+    "typing; python_version<'3.10'",
+    "typing_extensions; python_version<'3.10'",
+    "scikit-learn",
+
+    # load dataset from huggingface
+    "datasets",
+    "hdf5plugin",
+
+    # rich text
+    "rich[jupyter]",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit"
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/ece1508-ai-alchemist/wildfire-segmentation"
+"Bug Tracker" = "https://github.com/ece1508-ai-alchemist/wildfire-segmentation/issues"
+
+
+[tool.isort]
+force_grid_wrap=0
+include_trailing_comma=true
+line_length=120
+multi_line_output=3
+skip_glob=["env/*", 'docs/*']
+profile = "black"
+
+[tool.black]
+line_length = 120
+max-line-length=120
+exclude =[".git", "__pycache__", "venv", "env", 'docs/*']
+include = ["src/*"]
+
+[tool.mypy]
+strict=false
+ignore_missing_imports=true
+disallow_subclassing_any=false
+exclude = ['venv', '.venv', 'env', "notebooks"]
+files = [
+    "src/*",
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "click.*",
+    "bin.*"
+]
+ignore_errors = true
+
+[tool.pytest.ini_options]

@@ -1,0 +1,36 @@
+#!/bin/bash
+#SBATCH --account=def-bereyhia
+#SBATCH --time=1:30:00
+#SBATCH --gres=gpu:h100:1
+#SBATCH --cpus-per-task=6
+#SBATCH --mem=64G
+#SBATCH --output=slurm_latent_bit-%j.out
+
+# ===================================================================
+# Environment Setup
+# ===================================================================
+echo "Job started on $(hostname) at $(date)"
+
+nvidia-smi
+# load module
+module purge
+module load python/3.11
+module load gcc arrow/21.0.0
+module load scipy-stack/2025a
+echo "Modules loaded."
+# activate virtual environment
+source bit/bin/activate
+
+echo "Virtual environment activated."
+
+# ===================================================================
+# Job Execution
+# ===================================================================
+
+# Train
+
+echo "Starting Python training script(fire benchmark)"
+
+python train_nbrlatent_bit_fire.py
+
+echo "Job finished at $(date)"
