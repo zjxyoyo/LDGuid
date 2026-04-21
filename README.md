@@ -105,6 +105,7 @@ First, train the adversarial autoencoder to learn the latent representation of s
 python src/train/modified_autoencoder_train.py
 ```
 _This script will save the pretrained DE model weights to your local directory._
+
 **Step 2: Train the Main CD Model (LDGuid U-Net)**
 Next, train the downstream U-Net model guided by the pretrained DE module.
 ```bash
