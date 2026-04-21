@@ -76,7 +76,7 @@ Ensure each dataset folder contains exactly three subfolders for the bitemporal 
         └── label/           # Change masks (Ground truth)
 ```
 
-**2. Data Structure for BIT**
+### 2. Data Structure for BIT
 The **Bitemporal Image Transformer (BIT)** model employs a different data loading logic. **All 4 datasets** (including CaBuAr) must be manually unified into the following structure.
 
 Crucially, you must create a list directory containing .txt files that explicitly define the image filenames for each data split.
