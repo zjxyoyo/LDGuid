@@ -56,6 +56,7 @@ Due to the distinct data loading mechanisms of the different baselines implement
 For the **AERNet** and **U-Net** models, the required data structure depends on the specific dataset.
 
 **For the CaBuAr Dataset:**
+
 After extracting the official downloaded file, place the two main folders into the `wildfire-segmentation/data/` directory.
 ```text
 wildfire-segmentation/
@@ -66,6 +67,7 @@ wildfire-segmentation/
 ```
 
 **For SVCD, LEVIR-CD, and WHU-CD Datasets:**
+
 Ensure each dataset folder contains exactly three subfolders for the bitemporal images and their corresponding labels.
 ```text
 [Model_Directory]/           # e.g., AERNet/ or U-Net_Directory/
@@ -100,6 +102,7 @@ We provide a step-by-step guide to train the LDGuid framework using the **CaBuAr
 ### 1. Main Pipeline: Wildfire Segmentation (CaBuAr + U-Net)
 
 **Step 1: Pretrain the Difference Embedding (DE) Module**
+
 First, train the adversarial autoencoder to learn the latent representation of semantic differences from the bitemporal images. Navigate to your project directory and run:
 ```bash
 python src/train/modified_autoencoder_train.py
@@ -107,6 +110,7 @@ python src/train/modified_autoencoder_train.py
 _This script will save the pretrained DE model weights to your local directory._
 
 **Step 2: Train the Main CD Model (LDGuid U-Net)**
+
 Next, train the downstream U-Net model guided by the pretrained DE module.
 ```bash
 python src/train/modified_train.py
@@ -114,6 +118,7 @@ python src/train/modified_train.py
 _(⚠️ Important: Before running this script, please open it and ensure that the load path for the DE weights correctly points to the file generated in Step 1)._
 
 **Step 3: Evaluation**
+
 The training script will automatically generate .csv log files containing the evaluation metrics (e.g., IoU, F1-score) across epochs. You can review these CSV files to evaluate the model's performance.
 
 ## 2. Advanced Usage: Exploring Other Combinations
